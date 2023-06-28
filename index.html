@@ -1,0 +1,999 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Intro to Angular</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="08b91ef0-79fe-49f2-893f-1510709e74e9" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://www.notion.so/icons/code_blue.svg"/></div><h1 class="page-title"><span style="white-space:pre">Intro to Angular</span></h1><p class="page-description"></p></header><div class="page-body"><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3"><span style="white-space:pre">Introduction</span></summary><div class="indented"><ul id="c89f2a62-c877-4afe-8101-47c0d73aa0b1" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">Mudit Gulati</span></li></ul><ul id="dcd6c723-ef07-4b00-95c7-8a92edd550ed" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">Principle Full Stack Developer</span></li></ul><ul id="ed95a989-ffbf-41f3-88ab-c99922532c7b" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">Investment Management Client Experience </span></li></ul><ul id="dee5bc03-01dd-46c3-9957-8d853d72012f" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">PinPoint Tool</span></li></ul><ul id="bc6c0642-7338-404a-ada3-6ef48356ad7e" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">Experience</span></li></ul></div></details><p id="b275d111-72c8-41b4-bf72-67e91f2acb21" class="">
+</p><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3"><span style="white-space:pre">What are we going to cover today?</span></summary><div class="indented"><ul id="08d757c6-3744-43c5-b889-723c2c975314" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">Angular is just a framework</span></li></ul><ul id="1e2ec8ae-a7be-498d-9d3c-ad1f38e882b9" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">Actually it is just html, css and javascript</span></li></ul><ul id="10910ce7-9839-40a5-9d9a-7a6b0e57d841" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">Framework overload</span></li></ul><ul id="f1db1f15-86f7-4307-ac10-22c79279c797" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">Demystifying frontend</span></li></ul><ul id="23414758-6e5c-4c82-bcdf-d8d0c60df01b" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">Path of least resistance </span></li></ul><figure id="65a005d1-a998-43b3-8481-e256fee79ced" class="image"><a href="Intro%20to%20Angular%2008b91ef079fe49f2893f1510709e74e9/Untitled.jpeg"><img style="width:720px" src="Intro%20to%20Angular%2008b91ef079fe49f2893f1510709e74e9/Untitled.jpeg"/></a></figure></div></details><p id="dff43d8d-106b-401b-bb37-2ab7f03cfb8c" class="">
+</p><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3"><span style="white-space:pre">How can we become better developers?</span></summary><div class="indented"><ul id="c4c0cb20-430a-4459-801f-b4c5eb1c472f" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">Imposter syndrome?</span></li></ul><ul id="908d4351-66e4-4645-8c42-af274bdeebd6" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">Tutorial Hell</span></li></ul><ul id="c2904787-dcd1-4563-9dbf-089e0603aff0" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">Solution - Relentless coding</span><figure id="e37ed299-8d24-476d-8c76-4ffb547b906e" class="image"><a href="Intro%20to%20Angular%2008b91ef079fe49f2893f1510709e74e9/60d33be945999ae41a3f4c92_feUdO9AA3CsdZrM3bRAlu9V70223KhcG7X9M-XqwItrqnuDRXvOTyOcaVohLoIp2jUtyUGgSonDuERdDE-Fg-TLm_2pkcahkZ3Z8kUm-iiWi8nKEqtgPSe-9DMoTSCHRPm113AWl.png"><img style="width:503px" src="Intro%20to%20Angular%2008b91ef079fe49f2893f1510709e74e9/60d33be945999ae41a3f4c92_feUdO9AA3CsdZrM3bRAlu9V70223KhcG7X9M-XqwItrqnuDRXvOTyOcaVohLoIp2jUtyUGgSonDuERdDE-Fg-TLm_2pkcahkZ3Z8kUm-iiWi8nKEqtgPSe-9DMoTSCHRPm113AWl.png"/></a></figure></li></ul><ul id="d596b235-dd24-41f2-a2e6-bc8abf361023" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">Learn the process of learning</span></li></ul><ul id="f999beb9-4899-4fbd-9802-10c07d1e3103" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">Shu Ha Ri</span></li></ul><ul id="7138bf6f-fc2b-41a6-b0ad-d60ecbf6a92a" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">Personal Project(s)</span></li></ul></div></details><p id="91df6c44-6287-49b0-b960-28fe5a47f079" class="">
+</p><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3"><span style="white-space:pre">What is frontend development?</span></summary><div class="indented"><h3 id="31dfd581-2d91-42e8-a28b-58b7541b9ce9" class=""><span style="white-space:pre">…and how is it different from backend development?</span></h3><figure id="437aa7cf-fa77-4d98-b060-c8d09ef6393d" class="image"><a href="Intro%20to%20Angular%2008b91ef079fe49f2893f1510709e74e9/Untitled%201.jpeg"><img style="width:758px" src="Intro%20to%20Angular%2008b91ef079fe49f2893f1510709e74e9/Untitled%201.jpeg"/></a></figure><ul id="df1c3d71-ee67-48f4-96e5-24f320d2f3df" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">UI/UX</span></li></ul><ul id="f56879ca-8241-473a-9c6f-1f836951329e" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">Concurrent vs Single Thread</span></li></ul><ul id="309dfccf-3e55-46ca-95b2-ab42a42ec555" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">Frontend Developer vs Backend Developer</span></li></ul><ul id="39516682-a82c-48e7-a8c4-9fa1830ebdec" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">Problem Solving</span><figure id="376e1257-7eb4-4a78-be29-00a6e4fa33b5" class="image"><a href="Intro%20to%20Angular%2008b91ef079fe49f2893f1510709e74e9/Mirsad_blog_pic1.png"><img style="width:750px" src="Intro%20to%20Angular%2008b91ef079fe49f2893f1510709e74e9/Mirsad_blog_pic1.png"/></a></figure></li></ul><p id="c618a0d6-424e-42ea-948a-bae4bdc25d82" class="">
+</p><ul id="d3969120-f9ac-4268-8f47-e12e3d914c86" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">Full Stack Developer</span><figure id="118a0340-5fe7-48f6-a7ec-c3f114d572c6" class="image"><a href="Intro%20to%20Angular%2008b91ef079fe49f2893f1510709e74e9/8cdec2b8e62266e72479bad6a6f299561585441dd48e7873f45eb6cd3c1747f0_1.jpg"><img style="width:682px" src="Intro%20to%20Angular%2008b91ef079fe49f2893f1510709e74e9/8cdec2b8e62266e72479bad6a6f299561585441dd48e7873f45eb6cd3c1747f0_1.jpg"/></a></figure><figure id="6c7af35d-2c0a-4c29-84f8-6f7ffd0cf957" class="image"><a href="Intro%20to%20Angular%2008b91ef079fe49f2893f1510709e74e9/Untitled.webp"><img style="width:608px" src="Intro%20to%20Angular%2008b91ef079fe49f2893f1510709e74e9/Untitled.webp"/></a></figure></li></ul><ul id="c8882af7-bfd3-4a2a-93e1-6e4c53bf7f16" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">Modern Frontend Tech Landscape</span></li></ul></div></details><p id="14ad38e3-7df7-45ba-9649-26bb9ed41153" class="">
+</p><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3"><span style="white-space:pre">HTML, CSS</span></summary><div class="indented"><ul id="0e6096e9-327b-4698-9de9-ae7585ac7de7" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">The Document Object Model (DOM) is the only thing that the browser understands. </span></li></ul><ul id="c230c2a8-af91-4efc-8010-6ec9af369b34" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">DOM tree</span></li></ul><ul id="fcb147a0-8440-4a01-bed1-dbeaef69d13d" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">Hypertext Markup Language - structure and content</span></li></ul><ul id="4603f304-a719-4811-bc58-01a9c264826a" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">tags with attributes and content</span></li></ul><ul id="b59daa84-6992-4c35-bcde-d2d79240466c" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">Cascading Style Sheets - style</span></li></ul><ul id="5f46af78-7f03-421a-ba96-a93e01ba8eb4" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">Layout and Positioning</span><figure id="069d5bb7-3510-4f03-906a-7a3ffe4f503f" class="image"><a href="Intro%20to%20Angular%2008b91ef079fe49f2893f1510709e74e9/1_6EwJAhPC-vsswoMT9T6Zsw.jpg"><img style="width:359px" src="Intro%20to%20Angular%2008b91ef079fe49f2893f1510709e74e9/1_6EwJAhPC-vsswoMT9T6Zsw.jpg"/></a></figure></li></ul><ul id="cba05af2-597c-49b5-80f6-9464ade3eaf3" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">Flex</span></li></ul><ul id="9bf755cc-4429-443c-9c45-1bfc0a1e064a" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">Grid</span></li></ul></div></details><p id="7c9f349a-1a57-4da0-844c-710bc89fef10" class="">
+</p><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3"><span style="white-space:pre">Javascript</span></summary><div class="indented"><ul id="bc0df797-b551-414f-a4a9-4b4eac517811" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">Most Used language</span></li></ul><ul id="7a9c8c47-f67c-461d-94d9-058050af6f82" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">Most Hated language</span><figure id="e0c2c4b9-dbfb-4f74-bb00-61fd4cbb1e3b" class="image"><a href="Intro%20to%20Angular%2008b91ef079fe49f2893f1510709e74e9/images_(2).jpeg"><img style="width:211px" src="Intro%20to%20Angular%2008b91ef079fe49f2893f1510709e74e9/images_(2).jpeg"/></a></figure><figure id="daea6eb8-f198-4f04-b9e6-eea135871828" class="image"><a href="Intro%20to%20Angular%2008b91ef079fe49f2893f1510709e74e9/mind_js.jpg"><img style="width:796px" src="Intro%20to%20Angular%2008b91ef079fe49f2893f1510709e74e9/mind_js.jpg"/></a></figure><figure id="141fc42a-4caa-4251-903f-46043f1cae7d" class="image"><a href="Intro%20to%20Angular%2008b91ef079fe49f2893f1510709e74e9/javascript-is-olive-oil-for-developers.jpg"><img style="width:911px" src="Intro%20to%20Angular%2008b91ef079fe49f2893f1510709e74e9/javascript-is-olive-oil-for-developers.jpg"/></a></figure></li></ul><p id="1e22e40e-8cf0-4479-957a-317442cbbafe" class="">
+</p><p id="9a3a1c33-ff82-4897-9c05-aee3fa5b58cd" class="">
+</p></div></details><p id="2c4822af-00c0-4ca1-b4dc-f624c3cb8482" class="">
+</p><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3"><span style="white-space:pre">Typescript</span></summary></details><p id="dc28ec59-70c9-4aa1-816f-ac8df84cc9e6" class="">
+</p><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3"><span style="white-space:pre">Frameworks</span></summary><div class="indented"><figure id="6c81d49b-d461-4c91-be7a-008670e76dd3" class="image"><a href="Intro%20to%20Angular%2008b91ef079fe49f2893f1510709e74e9/Untitled%201.webp"><img style="width:606px" src="Intro%20to%20Angular%2008b91ef079fe49f2893f1510709e74e9/Untitled%201.webp"/></a></figure></div></details><p id="6eed4a12-7ff4-4551-a220-ee1b559565a2" class="">
+</p><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3"><span style="white-space:pre">Angular</span></summary><div class="indented"><p id="952c0fad-215c-4011-92d3-4e757f5bc655" class="">
+</p><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3"><span style="white-space:pre">Prerequisites</span></summary><div class="indented"><ol type="1" id="c190c84b-8428-4f0d-a2f8-5dd7b1056676" class="numbered-list" start="1"><li><span style="white-space:pre">latest nodejs</span></li></ol><ol type="1" id="e95c4547-b7a4-4560-9760-5c878e72af50" class="numbered-list" start="2"><li><span style="white-space:pre">nvm</span></li></ol><ol type="1" id="402c146c-7c70-4f20-a2f3-c6ea467f23f4" class="numbered-list" start="3"><li><span style="white-space:pre">vscode</span></li></ol></div></details><p id="fa4c8b1b-1b9b-403b-8428-8481bed09901" class="">
+</p><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3"><span style="white-space:pre">CLI</span></summary><div class="indented"><ul id="6a7a6290-0fb3-46a8-b4a4-84fde3bdcd58" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">automates many of the things that you would otherwise have to do manually</span></li></ul><ul id="b3150ac8-979e-4c80-9844-6767a117ce77" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">webpack configurations so that you can run your code locally</span></li></ul><ul id="1cf13d16-27be-4725-98c6-bd2895e3146f" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">and also build it for production</span></li></ul><ul id="63b041e2-c4eb-4a46-b4ea-ca5d7213bb0d" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">also lets you run the test suite with Jasmine and Karma</span></li></ul><ul id="7755ae44-9fa0-415d-bfbe-5aedcda03977" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">automatically generate the boilerplate code for you</span></li></ul><p id="cd28cbdd-b3f6-443e-89ef-13af0967addb" class="">
+</p><p id="793128f4-dabd-49b6-86dc-a4664b0cd4f8" class=""><span style="white-space:pre">install angular globally</span></p><pre id="0a842e68-b20b-4edf-b25f-f5fb9479291f" class="code"><code>npm install -g @angular/cli
+ng --version</code></pre><p id="2347d9ba-bbc7-4ada-91ab-6e2083455ebc" class=""><span style="white-space:pre">this gives access to the ng command in your path that you can use to do various tasks</span></p><p id="2073148b-015d-4a69-8192-6049fbb1c90f" class="">
+</p><p id="5cc8f0f1-4c32-4974-9c15-3af45849fbf5" class=""><span style="white-space:pre">There are many commands available for cli</span></p><pre id="89b6ad75-b77d-45ee-a465-63dea8d389c0" class="code"><code>ng —help
+ng new angular-course</code></pre><p id="68c32e4e-ce12-4e1a-b2aa-371b0ae298da" class=""><span style="white-space:pre">It will ask a couple of questions - </span></p><ul id="5084734b-1a63-4af6-969d-978a1d1e90f2" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">routing</span></li></ul><ul id="990008ff-ee20-41f8-9b5e-de0ab6a7e7d0" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">scss</span></li></ul></div></details><p id="22f520bd-aa1d-44a3-9fe7-67e18cf4e986" class="">
+</p><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3"><span style="white-space:pre">Project structure</span></summary><div class="indented"><ul id="1cd07a82-2bbe-4686-a86f-d9739037bb51" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">angular handles alot of complexity right out of the box</span></li></ul><ul id="85f53686-8787-4a31-b22d-19c60adf1b8f" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">tslint.json - Linting</span></li></ul><ul id="549e2d89-cf14-4b97-a03c-ad4e1bffd453" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">tsconfig files - how to compile code into vanilla js that can be used by the browser</span></li></ul><ul id="69f6d492-8543-4a83-8278-8d7bdd22d0ee" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">package.json - register dependencies, run scripts</span></li></ul><ul id="78f3a1e2-2ddf-4b0e-993a-404b028721a2" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">karma.conf.js - to run your test cases</span></li></ul><ul id="5c60eae6-31b3-485d-b7d7-704b55b470c3" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">blowserlist - browser specific settings</span></li></ul><ul id="bcfb9a3f-e207-4f1a-a014-66ab0d0383e7" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">angular.json - cli behavior</span></li></ul><ul id="c51d3620-31fb-46a3-b5d3-6095e0147069" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">gitignore - skip repo</span></li></ul><ul id="e00f8ed6-4cb5-423c-b791-47ea59d0b7c5" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">node_modules</span></li></ul><ul id="f13b5cee-2ec7-4561-86b7-5379303e9111" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">dist - compiled files for deployment</span></li></ul><ul id="9a700be3-941d-4c75-a2f1-9851b2f7afcf" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">src directory - all of the source code</span><ul id="1b1e7d69-3db2-48f5-b95e-d1a980712632" class="bulleted-list"><li style="list-style-type:circle"><span style="white-space:pre">main.ts - app is initially bootstrapped - calling platformBrowserDynamic() with bootstrapModule passing the app module</span></li></ul><ul id="af692a93-c11f-48ed-b88b-92fa98ca213c" class="bulleted-list"><li style="list-style-type:circle"><span style="white-space:pre">index.html - basically the shell for your application</span><ul id="13da73a5-2072-4399-9a21-06479d23c9dd" class="bulleted-list"><li style="list-style-type:square"><span style="white-space:pre">this is the first thing that is loaded into the browser and then app-root will be replaced with the angular application</span></li></ul></li></ul><ul id="2ea019da-9b8d-4c5c-9b07-76675729e9d3" class="bulleted-list"><li style="list-style-type:circle"><span style="white-space:pre">style.scss - register style that will applied throughout the entire application</span><ul id="48db9226-9923-4f60-8a18-e726638e635b" class="bulleted-list"><li style="list-style-type:square"><span style="white-space:pre">we can use @import statement to load an external css</span></li></ul></li></ul></li></ul><ul id="125ce74d-a5ae-42e5-81f2-fd2333d400fe" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">environments</span></li></ul><ul id="e5244f97-e26e-4585-b3e1-ce5d256e8beb" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">assets - all these will be copied over to the dist folder</span></li></ul><ul id="bfbfebf2-80e9-465e-91c0-0682ad144cfc" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">app directory</span></li></ul></div></details><p id="06e80d88-c218-4782-a507-0d3928119ba3" class="">
+</p><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3"><span style="white-space:pre">Components</span></summary><div class="indented"><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3"><span style="white-space:pre">What is a component?</span></summary><div class="indented"><ul id="81d18583-2736-4602-b045-dc1ec34503f1" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">Components are like lego pieces of an angular application.</span></li></ul><ul id="f880e88c-fa14-48c8-abe7-1e23d6f6a067" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">the component itself is a typescript class but it uses this @Component decorator to sprinkle in some angular magic</span></li></ul><ul id="1e29744a-cbdc-448c-922f-fa3216bb9bc9" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">It allows us to bind the data from the typescript file to the html template</span></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3"><span style="white-space:pre">Binding to data and events</span></summary><div class="indented"><ul id="006666ac-c630-4424-8491-84a06aca8909" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">bind to the events happening in html</span></li></ul><pre id="dd892b5a-997b-4bae-9e9c-5bc9b1b8492e" class="code"><code>&lt;h1&gt; {{ title }}&lt;/h1&gt;
+
+&lt;button [disabled]=&quot;clicked&quot; (click)=&quot;handleClick()&quot;&gt;
+	Click Me
+&lt;/button&gt;</code></pre><pre id="bdbdc374-545f-4f7e-9c63-237713a50077" class="code"><code>import { Component } from &#x27;@angular/core&#x27;;
+
+@Component({
+	selector: &#x27;app-home&#x27;,
+	templateUrl: &#x27;./home.component.html&#x27;,
+	styleUrls: [&#x27;./home.component.scss&#x27;]
+})
+export class HomeComponent {
+	clicked = false;
+	title = &quot;This is being interpolated from a variable&quot;;
+
+	handleClick() {
+		this.clicked = true;
+	}
+}</code></pre></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3"><span style="white-space:pre">Interpolation</span></summary><div class="indented"><ul id="2251bf8a-d1c1-4584-a53a-7418ecdbe759" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">we are taking a value from our typescript and showing it in the UI</span></li></ul><ul id="d13bc3e6-8f79-40e0-8fc6-befb9c3994f4" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">double curly brackets are used to interpolate values</span></li></ul><p id="7637c031-6798-43b5-add9-8f170d0dc359" class="">
+</p></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3"><span style="white-space:pre">Use the component</span></summary><div class="indented"><ul id="96e8a278-9672-438b-91cb-63ebd3f3c244" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">use the selector &lt;app-home&gt;&lt;/app-home&gt;</span></li></ul><ul id="6dbf86c0-fa36-44d3-9367-60a36fb54f27" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">or use this router outlet using angular.routing</span></li></ul><pre id="a2cb17ac-384b-46de-8aba-77cfbd127985" class="code"><code>import { NgModule } from &#x27;@angular/core&#x27;;
+import { Routes, RouterModule } from &#x27;@angular/router&#x27;;
+import { HomeComponent } from &#x27;./home/home.component&#x27;;
+
+const routes: Routes = [
+	{ path: &#x27;&#x27;, component: HomeComponent }
+];
+
+@NgModule({
+	imports: [RouterModule.forRoot(routes)],
+	exports: [RouterModule]
+})
+export class AppRoutingModule {}</code></pre></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3"><span style="white-space:pre">Directives</span></summary><div class="indented"><ul id="0e206198-4263-4410-9f4d-b3d77d72547b" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">is basically like a component except it does not have its own html or css</span></li></ul><ul id="723dce63-3419-4a87-9adc-7099e442aec0" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">instead it attaches itself to a host element and changes the behaviour of it</span></li></ul><ul id="99deff55-979e-4384-86b0-e59ae6b15f62" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">the most useful built in directive in angular is *ngIf</span></li></ul><ul id="28859f58-8c49-4104-88bf-6c40c324fae0" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">and any directive that starts with a * is a structural directive and it controls how elements are rendered in the DOM</span></li></ul><ul id="702b68cc-9fba-45df-b532-e2812d569b8a" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">*ngFor - you can use it to loop over an array of data</span></li></ul><pre id="7ef10d60-cc8b-4b93-8141-87c03d836439" class="code"><code>import { Component } from &#x27;@angular/core&#x27;;
+
+@Component({
+	selector: &#x27;app-home&#x27;,
+	templateUrl: &#x27;./home.component.html&#x27;,
+	styleUrls: [&#x27;./home.component.scss&#x27;]
+})
+export class HomeComponent {
+	clicked = false;
+	title = &quot;This is being interpolated from a variable&quot;;
+  
+	boat = {
+		name: &#x27;Starfire&#x27;,
+		year: 1977
+	}
+
+	boats = [
+		{
+			name: &#x27;Starfire&#x27;,
+			year: 1977
+		},
+		{
+			name: &#x27;Oracle&#x27;,
+			year: 2015
+		}
+	];
+
+	handleClick() {
+		this.clicked = true;
+	}
+}</code></pre><pre id="321dc856-6b53-452e-b02d-09e0345a07d6" class="code"><code>&lt;h1&gt; {{ title }}&lt;/h1&gt;
+
+&lt;button [disabled]=&quot;clicked&quot; (click)=&quot;handleClick()&quot;&gt;
+	Click Me
+&lt;/button&gt;
+
+&lt;div *ngIf=&quot;clicked&quot;&gt;
+	&lt;h3&gt;{{ boat.name }}&lt;/h3&gt;
+	&lt;p&gt;Build in {{ boat.year }}&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div *ngFor=&quot;let boat of boats&quot;&gt;
+	&lt;h3 [ngClass]=&quot;{
+		&#x27;green&#x27;: boat.name == &#x27;Starfish&#x27;,
+		&#x27;red&#x27;: boat.name == &#x27;Oracle&#x27;
+	}&quot;&gt;
+	&lt;h3&gt;{{ boat.name }}&lt;/h3&gt;
+	&lt;div style=&quot;height:100px;width:100px;background:blue&quot; appMagnifier&gt;&lt;/div&gt;
+	&lt;p&gt;Build in {{ boat.year | year}}&lt;/p&gt;
+&lt;/div&gt;</code></pre><pre id="7d5e7e4e-07c0-4a65-8f6b-0f94b9a9af03" class="code"><code>import { Directive, HostBinding, HostListener } from &#x27;@angular/core&#x27;;
+
+@Directive({
+	selector: &#x27;[appMagnifier]&#x27;
+})
+export class MagnifierDirective {
+	@HostBinding(&#x27;width&#x27;) width = 200;
+
+	@HostListener(&#x27;mouseenter&#x27;, [&#x27;$event&#x27;])
+	onHover(e) {
+		this.width = 300;
+	}
+}</code></pre></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3"><span style="white-space:pre">Pipes</span></summary><div class="indented"><ul id="c510fd98-ad03-4d7f-9969-445ab0946d98" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">function that takes in a value and spits out another value</span></li></ul><ul id="7045615d-98ac-44d3-97a7-cf633747496e" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">async pipe</span></li></ul><ul id="f69f8121-20a8-47a6-a8de-1af41ee79be7" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">implements PipeTransform</span></li></ul><ul id="c1dc1899-1ce0-458b-9ee0-de70d0357118" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">implement transform method that takes in a value and returns a value that needs to be shown into the UI</span></li></ul><pre id="85a60617-99cf-48c4-be51-067c37219ea8" class="code"><code>import { Pipe, PipeTransform } from &#x27;@angular/core&#x27;;
+
+@Pipe({
+	name: &#x27;year&#x27;
+})
+export class YearPipe implements PipeTransform {
+	transform(value: number): string {
+		return balue.toString().substr(2,2);
+	}
+}</code></pre></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3"><span style="white-space:pre">Lifecycle</span></summary><div class="indented"><ul id="debb0d74-44ec-4409-863b-8ba2e5f3fbfd" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">constructor → dependency injection</span></li></ul><ul id="6f66e824-21bb-4346-82c4-b27ca826b117" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">no guarantee of property binding  until ngOnInit → the first time change detection runs on this component → set up data</span></li></ul><ul id="6fed723a-670d-4e19-b09c-a7993d90d17a" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">ngOnDestroy</span></li></ul><ul id="046dd433-ab08-4027-a47c-c208ceb02f35" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">ngAfterViewInit → if you have child views</span></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3"><span style="white-space:pre">Change Detection</span></summary><div class="indented"><ul id="81bf24ed-be56-4813-9bd2-424c4b427c36" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">zone.js → Listens for any events of asynchronous activity and re-renders necessary component</span></li></ul><ul id="5ccdc423-402c-45da-ad7f-e5d7da0e1f6b" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">ngDoCheck </span></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3"><span style="white-space:pre">Smart components vs Dumb components</span></summary><div class="indented"><ul id="c8ae887e-c813-4fd7-a6af-49c94831e77b" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">smart components vs dumb components/ stateful or stateless /container vs presentational</span></li></ul><ul id="90af3c40-fe62-415b-b398-f962d9af445c" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">separation of concern to make your code predictable </span></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3"><span style="white-space:pre">Sharing Data between Angular Components - Four Methods</span></summary><div class="indented"><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3"><span style="white-space:pre">Parent to Child: Sharing Data via Input</span></summary><div class="indented"><h3 id="05aa7b67-d823-4525-b271-85b451f4e1cf" class=""><strong><span style="white-space:pre">parent.component.ts</span></strong></h3><pre id="36a92119-29d4-4505-8dc2-b9b9d9bd2b44" class="code"><code>import { Component } from &#x27;@angular/core&#x27;;
+
+@Component({
+  selector: &#x27;app-parent&#x27;,
+  template: `
+    &lt;app-child [childMessage]=&quot;parentMessage&quot;&gt;&lt;/app-child&gt;
+  `,
+  styleUrls: [&#x27;./parent.component.css&#x27;]
+})
+export class ParentComponent{
+  parentMessage = &quot;message from parent&quot;
+  constructor() { }
+}</code></pre><h3 id="4000d2e3-6d69-476b-8071-1036c4b47f77" class=""><strong><span style="white-space:pre">child.component.ts</span></strong></h3><pre id="f5c11a57-f22b-4ab6-8af2-d1bfb14ef9d3" class="code"><code>import { Component, Input } from &#x27;@angular/core&#x27;;
+
+@Component({
+  selector: &#x27;app-child&#x27;,
+  template: `
+      Say {{ message }}
+  `,
+  styleUrls: [&#x27;./child.component.css&#x27;]
+})
+export class ChildComponent {
+
+  @Input() childMessage: string;
+
+  constructor() { }
+
+}</code></pre></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3"><span style="white-space:pre">Child to Parent: Sharing Data via ViewChild</span></summary><div class="indented"><ul id="c84727e0-e5d6-4c89-99da-42958fd67bbe" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">ViewChild → allows a one component to be injected into another, giving the parent access to its attributes and functions</span></li></ul><ul id="7cd78049-79ac-4c53-a3f8-bc9956c8db1b" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">child won’t be available until after the view has been initialized</span></li></ul><ul id="dd9be2f9-9442-47f2-95ca-0c690c6918b4" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">access data in ngAfterViewInit</span></li></ul><h3 id="d6fd5198-32c9-4dae-8c28-85c219548a7d" class=""><strong><span style="white-space:pre">parent.component.ts</span></strong></h3><pre id="ae3233bd-5d3d-4160-ad8f-22ee9cfd5d35" class="code"><code>import { Component, ViewChild, AfterViewInit } from &#x27;@angular/core&#x27;;
+import { ChildComponent } from &quot;../child/child.component&quot;;
+
+@Component({
+  selector: &#x27;app-parent&#x27;,
+  template: `
+    Message: {{ message }}
+    &lt;app-child&gt;&lt;/app-child&gt;
+  `,
+  styleUrls: [&#x27;./parent.component.css&#x27;]
+})
+export class ParentComponent implements AfterViewInit {
+
+  @ViewChild(ChildComponent) child;
+
+  constructor() { }
+
+  message:string;
+
+  ngAfterViewInit() {
+    this.message = this.child.message
+  }
+}</code></pre><h3 id="34f67c62-5267-4ece-b471-d3672e3aac00" class=""><strong><span style="white-space:pre">child.component.ts</span></strong></h3><pre id="caa8b401-02d7-4056-9653-6c727fa74a3a" class="code"><code>import { Component} from &#x27;@angular/core&#x27;;
+
+@Component({
+  selector: &#x27;app-child&#x27;,
+  template: `
+  `,
+  styleUrls: [&#x27;./child.component.css&#x27;]
+})
+export class ChildComponent {
+
+  message = &#x27;Hola Mundo!&#x27;;
+
+  constructor() { }
+
+}</code></pre></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3"><span style="white-space:pre">Child to Parent: Sharing Data via Output() and EventEmitter</span></summary><div class="indented"><h3 id="2d9e61a0-d8c9-4564-8297-fcb347a3b9ec" class=""><strong><span style="white-space:pre">parent.component.ts</span></strong></h3><pre id="dce6dbad-2967-4a6f-a5b5-db193712a3aa" class="code"><code>import { Component } from &#x27;@angular/core&#x27;;
+
+@Component({
+  selector: &#x27;app-parent&#x27;,
+  template: `
+    Message: {{message}}
+    &lt;app-child (messageEvent)=&quot;receiveMessage($event)&quot;&gt;&lt;/app-child&gt;
+  `,
+  styleUrls: [&#x27;./parent.component.css&#x27;]
+})
+export class ParentComponent {
+
+  constructor() { }
+
+  message:string;
+
+  receiveMessage($event) {
+    this.message = $event
+  }
+}</code></pre><h3 id="4bd1439e-d4c1-4ad9-b914-5f70967cc1b1" class=""><strong><span style="white-space:pre">child.component.ts</span></strong></h3><pre id="4cc157d0-caef-49ec-a679-cb232c18ace2" class="code"><code>import { Component, Output, EventEmitter } from &#x27;@angular/core&#x27;;
+
+@Component({
+  selector: &#x27;app-child&#x27;,
+  template: `
+      &lt;button (click)=&quot;sendMessage()&quot;&gt;Send Message&lt;/button&gt;
+  `,
+  styleUrls: [&#x27;./child.component.css&#x27;]
+})
+export class ChildComponent {
+
+  message: string = &quot;Hola Mundo!&quot;
+
+  @Output() messageEvent = new EventEmitter&lt;string&gt;();
+
+  constructor() { }
+
+  sendMessage() {
+    this.messageEvent.emit(this.message)
+  }
+}</code></pre></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3"><span style="white-space:pre">Unrelated Components: Sharing Data via a Service</span></summary><div class="indented"><ul id="a8992d8e-c89a-492e-a38a-8ef9db7fea60" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">dependency injection</span></li></ul><ul id="effd8e37-2211-496e-b4d9-1674c88c6beb" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">singleton and initialised once</span></li></ul><ul id="d1982c95-e937-4ff1-b65d-88ac31e57ae6" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">stateless(library of functionality) and stateful (holds data)</span></li></ul><ul id="207f9765-a82e-4913-9b8a-2d6146c6f3e2" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">separation of concern - allows your components to focus on UI</span></li></ul><pre id="605cab97-f641-433d-b9a1-74f02b75e337" class="code"><code>import { Injectable } from &#x27;@angular/core&#x27;;
+
+@Injectable({
+	providedIn: &#x27;root&#x27;
+})
+export class ClockService {
+
+	tick = 0;
+
+	constructor() {
+		setInterval(() =&gt; this.tick++, 1000);
+	}
+}</code></pre></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3"><span style="white-space:pre">Unrelated Components: Sharing Data via an Observable</span></summary><div class="indented"><h3 id="359a8519-f244-4a40-862d-cca05d394a53" class=""><strong><span style="white-space:pre">data.service.ts</span></strong></h3><pre id="0cb18657-5459-49f0-8f43-ec9057b7dbd9" class="code"><code>import { Injectable } from &#x27;@angular/core&#x27;;
+import { BehaviorSubject } from &#x27;rxjs&#x27;;
+
+@Injectable()
+export class DataService {
+
+  private messageSource = new BehaviorSubject(&#x27;default message&#x27;);
+  currentMessage = this.messageSource.asObservable();
+
+  constructor() { }
+
+  changeMessage(message: string) {
+    this.messageSource.next(message)
+  }
+
+}</code></pre><h3 id="9faf7813-8a68-4085-bf79-3eb62f0c96ad" class=""><strong><span style="white-space:pre">parent.component.ts</span></strong></h3><pre id="d63125f0-b6c3-4d09-b28a-6842ec9f7676" class="code"><code>import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import { DataService } from &quot;../data.service&quot;;
+import { Subscription } from &#x27;rxjs&#x27;;
+
+@Component({
+  selector: &#x27;app-parent&#x27;,
+  template: `
+    {{message}}
+  `,
+  styleUrls: [&#x27;./sibling.component.css&#x27;]
+})
+export class ParentComponent implements OnInit, OnDestroy {
+
+  message:string;
+  subscription: Subscription;
+
+  constructor(private data: DataService) { }
+
+  ngOnInit() {
+    this.subscription = this.data.currentMessage.subscribe(message =&gt; this.message = message)
+  }
+  
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+}</code></pre><h3 id="a68c794c-3e60-4681-ab83-b4a9f702ecf7" class=""><strong><span style="white-space:pre">sibling.component.ts</span></strong></h3><pre id="3b2136e5-9835-4594-a325-129ab806449e" class="code"><code>import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import { DataService } from &quot;../data.service&quot;;
+import { Subscription } from &#x27;rxjs&#x27;;
+
+@Component({
+  selector: &#x27;app-sibling&#x27;,
+  template: `
+    {{message}}
+    &lt;button (click)=&quot;newMessage()&quot;&gt;New Message&lt;/button&gt;
+  `,
+  styleUrls: [&#x27;./sibling.component.css&#x27;]
+})
+export class SiblingComponent implements OnInit, OnDestroy {
+
+  message:string;
+  subscription: Subscription;
+
+  constructor(private data: DataService) { }
+
+  ngOnInit() {
+    this.subscription = this.data.currentMessage.subscribe(message =&gt; this.message = message)
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  newMessage() {
+    this.data.changeMessage(&quot;Hello from Sibling&quot;)
+  }
+
+}</code></pre></div></details></div></details></div></details><p id="77f1690c-9f01-4523-a27f-d6b9954542fc" class="">
+</p><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3"><span style="white-space:pre">Modules</span></summary><div class="indented"><p id="fb110e9f-9ea4-44c5-ad37-1110f74da697" class=""><span style="white-space:pre">@NgModule decorator</span></p><pre id="6e1eb3d0-5987-43e7-926c-f7560c830e75" class="code"><code>@NgModule({
+  // Components defined in this module
+  declarations: [
+    FooComponent
+  ],
+  // Components used in this module
+  imports: [
+    CommonModule
+  ],
+  // Components that can be imported by other modules
+  exports: [
+    FooComponent
+  ],
+})</code></pre></div></details><p id="9a896815-c198-46de-933b-83fef7278410" class="">
+</p><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3"><span style="white-space:pre">Advanced Concepts</span></summary><div class="indented"><ul id="7c08bc43-77ce-49c0-b266-88d7cb93df76" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">async and Promises</span></li></ul><ul id="f6380674-b221-4e03-a35d-aff2c4bbf58c" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">State management (ngrx)</span></li></ul><ul id="60fda973-b441-41a3-b7b9-2c77d51f4fad" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">Loading component from javascript dynamically</span></li></ul><ul id="f79ff497-81c9-4521-abf9-29d9967ce3da" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">Web workers</span></li></ul><ul id="b762a8bf-d7a0-466a-aa64-bf5d08a54eab" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">Service workers</span></li></ul><ul id="82dd1d02-f07a-4024-b418-ebf88abcffdc" class="bulleted-list"><li style="list-style-type:disc"><span style="white-space:pre">Interceptor</span></li></ul></div></details></div></details><p id="149ab874-0069-4aa3-8364-16bca8a9782b" class="">
+</p><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3"><span style="white-space:pre">PinPoint UI exploration</span></summary></details><p id="f254d195-5f59-49ee-8076-e4f9bcc88e8b" class="">
+</p></div></article></body></html>
